@@ -1,0 +1,26 @@
+name: Security Scan
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+
+      - name: Run Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'python:3.7-slim'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          file: Dockerfile
