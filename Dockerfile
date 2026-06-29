@@ -1,11 +1,15 @@
-FROM python:3.11-slim
-USER root
+FROM alpine:3.22
 
-# Hii `python 3.7` ni ya zamani sana ina CVEs 200+ - Trivy atakama
-RUN pip install flask==3.0.0
+# Update packages
+RUN apk update && apk upgrade && \
+    adduser -D -u 10001 appuser
 
-# Tunatumia `root` = Checkov atakama
-CMD ["python", "-c", "print('Vulnerable Lab Running')"]
+WORKDIR /app
 
-RUN adduser -D appuser
+# Copy application
+COPY . .
+
+# Use non-root user
 USER appuser
+
+CMD ["sh"]
