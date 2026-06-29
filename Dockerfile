@@ -1,14 +1,8 @@
-FROM python:3.11-slim
+FROM python:3.12-alpine
 
-# UPGRADE WOTE 3 KWA PAMOJA = KUMUA TRIVY 100%
-RUN pip install --upgrade pip setuptools==70.0.0 wheel==0.46.2
+RUN pip install --no-cache-dir flask==3.0.0
 
-# INSTALL FLASK MPYA
-RUN pip install flask==3.0.0
-
-# TENGA MTUMIAJI MPYA = KUMUA CHECKOV
 RUN adduser -D appuser
 USER appuser
 
 CMD ["python", "-c", "print('Secure Lab Running')]"]
-
