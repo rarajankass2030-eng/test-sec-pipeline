@@ -1,15 +1,10 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
-# 1. UPGRADE PIP + WHEEL KWANZA = KUMUA TRIVY
-RUN pip install --upgrade pip wheel==0.46.2
+RUN python -m pip install --no-cache-dir --upgrade pip
+RUN python -m pip install --no-cache-dir wheel==0.46.2 flask==3.1.1
 
-# 2. INSTALL FLASK MPYA = KUMUA TRIVY TENA 
-RUN pip install flask==3.0.0
-
-# 3. TENGA MTUMIAJI MPYA = KUMUA CHECKOV
-RUN adduser -D appuser
+RUN adduser --disabled-password --gecos "" appuser
 USER appuser
 
-# 4. RUN APP KAMA MTUMIAJI WA KAWAIDA, SIO ROOT
-CMD ["python", "-c", "print('Secure Lab Running')]"]
+CMD ["python", "-c", "print('Secure Lab Running')"]
 
