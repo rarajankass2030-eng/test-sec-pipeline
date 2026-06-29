@@ -2,7 +2,6 @@ name: Security Scan
 on:
   push:
     branches: [ main ]
-
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -16,7 +15,8 @@ jobs:
       - name: Run Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'python:3.7-slim'
+          scan-type: 'fs' # <-- HII MPYA
+          file: '.' # <-- HII MPYA
           severity: 'HIGH,CRITICAL'
           exit-code: '1'
 
