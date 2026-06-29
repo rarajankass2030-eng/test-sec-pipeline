@@ -1,15 +1,8 @@
-FROM alpine:3.22
+FROM python:3.22-slim
 
-# Update packages
-RUN apk update && apk upgrade && \
-    adduser -D -u 10001 appuser
+RUN pip install flask==3.0.0
 
-WORKDIR /app
-
-# Copy application
-COPY . .
-
-# Use non-root user
+RUN adduser -D appuser
 USER appuser
 
-CMD ["sh"]
+CMD ["python", "-c", "pr
