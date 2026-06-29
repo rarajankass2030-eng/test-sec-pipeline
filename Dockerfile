@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM python:3.11-slim
 USER root
 
 # Hii `python 3.7` ni ya zamani sana ina CVEs 200+ - Trivy atakama
