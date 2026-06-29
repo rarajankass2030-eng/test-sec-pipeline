@@ -1,10 +1,14 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
-RUN python -m pip install --no-cache-dir --upgrade pip
-RUN python -m pip install --no-cache-dir wheel==0.46.2 flask==3.1.1
+# UPGRADE WOTE 3 KWA PAMOJA = KUMUA TRIVY 100%
+RUN pip install --upgrade pip setuptools==70.0.0 wheel==0.46.2
 
-RUN adduser --disabled-password --gecos "" appuser
+# INSTALL FLASK MPYA
+RUN pip install flask==3.0.0
+
+# TENGA MTUMIAJI MPYA = KUMUA CHECKOV
+RUN adduser -D appuser
 USER appuser
 
-CMD ["python", "-c", "print('Secure Lab Running')"]
+CMD ["python", "-c", "print('Secure Lab Running')]"]
 
